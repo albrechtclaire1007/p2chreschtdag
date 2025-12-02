@@ -2,7 +2,7 @@
 <html lang="lb">
 <head>
   <meta charset="UTF-8">
-  <title>P2 – Chrëschtdag Vokabeltrainer</title>
+  <title>P2 – Chrëschtdag Vokabeltrainer + Bam faarwen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     :root {
@@ -13,9 +13,7 @@
       --card-bg: #ffffff;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -94,9 +92,7 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    .screen.active {
-      display: block;
-    }
+    .screen.active { display: block; }
 
     .screen h2 {
       margin-top: 0;
@@ -154,7 +150,7 @@
       margin-top: 0.2rem;
     }
 
-    /* Lauschter a Klick highlight */
+    /* Lauschter a Klick */
     .clickable-card {
       cursor: pointer;
       border: 3px solid transparent;
@@ -273,14 +269,103 @@
       box-shadow: 0 0 0 3px rgba(229,83,83,0.4);
     }
 
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.3rem;
-      }
+    /* ----- Decorate the Tree ----- */
+    .tree-layout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 0.5rem;
+    }
 
-      .menu-buttons {
-        grid-template-columns: 1fr 1fr;
-      }
+    .tree-container {
+      background: #e8f7ec;
+      border-radius: 16px;
+      padding: 0.7rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    }
+
+    .tree-svg {
+      width: 260px;
+      max-width: 80vw;
+      height: auto;
+      display: block;
+    }
+
+    .palette-container {
+      min-width: 220px;
+      max-width: 320px;
+    }
+
+    .palette-title {
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+      text-align: center;
+    }
+
+    .color-palette {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      justify-content: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .palette-color {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+    }
+
+    .palette-color.selected {
+      border-color: #222;
+      box-shadow: 0 0 0 3px rgba(34,34,34,0.4);
+    }
+
+    .exercise-text {
+      background: var(--accent);
+      border-radius: 12px;
+      padding: 0.5rem 0.7rem;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .tree-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      justify-content: center;
+      margin-top: 0.4rem;
+    }
+
+    .ornament {
+      cursor: pointer;
+      stroke: #555;
+      stroke-width: 1.8;
+    }
+
+    .ornament.bauble {
+      fill: #ffffff;
+    }
+
+    .ornament.light {
+      fill: #ffffff;
+      stroke-dasharray: 2 1;
+    }
+
+    .star-shape {
+      fill: #f9e36b;
+      stroke: #e1c64f;
+      stroke-width: 2;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.3rem; }
+      .menu-buttons { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -288,7 +373,7 @@
 <div id="app">
   <header>
     <h1>P2 – Chrëschtdag</h1>
-    <p>Greenspiller mat Schoulschrëft – Lauschteren, Lies- a Schreifübungen</p>
+    <p>Greenspiller mat Schoulschrëft – Lauschteren, Lies- a Schreifübungen + Bam faarwen</p>
   </header>
 
   <!-- Hauptmenü -->
@@ -297,6 +382,7 @@
     <button onclick="showScreen('memory')">🧠 Memory</button>
     <button onclick="showScreen('schreif')">✏️ Schreif d'Wuert</button>
     <button onclick="showScreen('raetsel')">❓ Wien oder wat sinn ech?</button>
+    <button onclick="showScreen('decor')">🎄 Bam faarwen</button>
   </div>
 
   <!-- Lauschter a Klick -->
@@ -355,6 +441,96 @@
     <div class="riddle-box" id="riddle-text"></div>
     <div class="riddle-images" id="riddle-images"></div>
     <div class="feedback" id="riddle-feedback"></div>
+  </section>
+
+  <!-- Bam faarwen -->
+  <section id="screen-decor" class="screen">
+    <div class="top-bar">
+      <h2>🎄 Bam faarwen</h2>
+      <div class="status">Übung: <span id="decor-ex-index">1</span>/5</div>
+      <button class="btn-secondary" onclick="previousDecorExercise()">⬅️ Zréck</button>
+      <button class="btn-secondary" onclick="nextDecorExercise()">➡️ Weider</button>
+    </div>
+    <p class="instructions">
+      Wielt eng Faarf, klickt op eng Kugel oder Luucht a fiert se an. Wann all Kugele fäerdeg sinn, gesäis du, ob d'Léisung stëmmt.
+    </p>
+
+    <div class="tree-layout">
+      <div class="tree-container">
+        <svg id="tree-svg" class="tree-svg" viewBox="0 0 260 340">
+          <!-- Background -->
+          <rect x="0" y="0" width="260" height="340" fill="#e8f7ec"/>
+
+          <!-- Star -->
+          <polygon class="star-shape"
+            points="130,18 138,40 162,40 142,53 149,75 130,62 111,75 118,53 98,40 122,40"/>
+
+          <!-- Tree (3 triangles) -->
+          <polygon points="130,40 60,130 200,130" fill="#1f6b3a" stroke="#14502a" stroke-width="3"/>
+          <polygon points="130,90 50,190 210,190" fill="#1f6b3a" stroke="#14502a" stroke-width="3"/>
+          <polygon points="130,150 40,250 220,250" fill="#1f6b3a" stroke="#14502a" stroke-width="3"/>
+
+          <!-- Trunk -->
+          <rect x="112" y="250" width="36" height="50" fill="#8b5a2b" stroke="#5c3b1c" stroke-width="3"/>
+
+          <!-- 15 Baubles (class bauble) -->
+          <!-- row 1 -->
+          <circle class="ornament bauble" data-type="bauble" cx="90" cy="120" r="10"/>
+          <circle class="ornament bauble" data-type="bauble" cx="130" cy="115" r="10"/>
+          <circle class="ornament bauble" data-type="bauble" cx="170" cy="120" r="10"/>
+
+          <!-- row 2 -->
+          <circle class="ornament bauble" data-type="bauble" cx="70" cy="160" r="10"/>
+          <circle class="ornament bauble" data-type="bauble" cx="110" cy="165" r="10"/>
+          <circle class="ornament bauble" data-type="bauble" cx="150" cy="165" r="10"/>
+          <circle class="ornament bauble" data-type="bauble" cx="190" cy="160" r="10"/>
+
+          <!-- row 3 -->
+          <circle class="ornament bauble" data-type="bauble" cx="60" cy="205" r="10"/>
+          <circle class="ornament bauble" data-type="bauble" cx="95" cy="210" r="10"/>
+          <circle class="ornament bauble" data-type="bauble" cx="130" cy="212" r="10"/>
+          <circle class="ornament bauble" data-type="bauble" cx="165" cy="210" r="10"/>
+          <circle class="ornament bauble" data-type="bauble" cx="200" cy="205" r="10"/>
+
+          <!-- row 4 -->
+          <circle class="ornament bauble" data-type="bauble" cx="85" cy="240" r="10"/>
+          <circle class="ornament bauble" data-type="bauble" cx="175" cy="240" r="10"/>
+          <circle class="ornament bauble" data-type="bauble" cx="130" cy="240" r="10"/>
+
+          <!-- 10 lights (class light) -->
+          <circle class="ornament light" data-type="light" cx="110" cy="90" r="5"/>
+          <circle class="ornament light" data-type="light" cx="150" cy="95" r="5"/>
+
+          <circle class="ornament light" data-type="light" cx="80" cy="140" r="5"/>
+          <circle class="ornament light" data-type="light" cx="180" cy="140" r="5"/>
+
+          <circle class="ornament light" data-type="light" cx="60" cy="185" r="5"/>
+          <circle class="ornament light" data-type="light" cx="200" cy="185" r="5"/>
+
+          <circle class="ornament light" data-type="light" cx="75" cy="225" r="5"/>
+          <circle class="ornament light" data-type="light" cx="185" cy="225" r="5"/>
+
+          <circle class="ornament light" data-type="light" cx="115" cy="230" r="5"/>
+          <circle class="ornament light" data-type="light" cx="145" cy="230" r="5"/>
+        </svg>
+      </div>
+
+      <div class="palette-container">
+        <div class="exercise-text" id="decor-ex-text"></div>
+
+        <div class="palette-title">1. Wielt eng Faarf:</div>
+        <div class="color-palette" id="decor-palette"></div>
+
+        <div class="palette-title">2. Klickt op d'Kugele oder Luuchten.</div>
+
+        <div class="tree-controls">
+          <button class="btn-secondary" onclick="resetDecorColors()">🧼 Alles läschen</button>
+          <button onclick="checkDecorSolution()">✅ Kontrolléieren</button>
+        </div>
+
+        <div class="feedback" id="decor-feedback"></div>
+      </div>
+    </div>
   </section>
 </div>
 
@@ -448,12 +624,10 @@
     }
   ];
 
-  // --- Helper: get item by id ---
   function getItem(id) {
     return items.find(i => i.id === id);
   }
 
-  // --- Screen switching ---
   function showScreen(name) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     const screen = document.getElementById('screen-' + name);
@@ -467,13 +641,14 @@
       startWriteGame();
     } else if (name === 'raetsel') {
       startRiddleGame();
+    } else if (name === 'decor') {
+      initDecorGame();
     }
   }
 
   // ---------- Lauschter a Klick ----------
   let currentListenId = null;
   let lauschterScore = 0;
-  let lauschterAudio = null;
 
   function initLauschter() {
     const grid = document.getElementById('lauschter-grid');
@@ -482,9 +657,7 @@
       const div = document.createElement('div');
       div.className = 'card clickable-card';
       div.dataset.id = item.id;
-      div.innerHTML = `
-        <img src="${item.image}" alt="${item.label}">
-      `;
+      div.innerHTML = `<img src="${item.image}" alt="${item.label}">`;
       div.addEventListener('click', () => handleLauschterClick(item.id, div));
       grid.appendChild(div);
     });
@@ -499,7 +672,7 @@
     document.getElementById('lauschter-feedback').textContent =
       "Lauschter a klick op dat richtegt Bild.";
     resetClickStyles();
-    playAudio(randomItem.audio, audio => lauschterAudio = audio);
+    playAudio(randomItem.audio);
   }
 
   function resetClickStyles() {
@@ -517,7 +690,6 @@
       document.getElementById('lauschter-score').textContent = lauschterScore.toString();
       document.getElementById('lauschter-feedback').textContent =
         "Super! Dat ass richteg.";
-      // automates next round after kuerzen Delay
       setTimeout(startLauschterRound, 1200);
     } else {
       element.classList.add('wrong');
@@ -529,7 +701,7 @@
   function playCurrentAudio() {
     if (!currentListenId) return;
     const item = getItem(currentListenId);
-    playAudio(item.audio, audio => lauschterAudio = audio);
+    playAudio(item.audio);
   }
 
   // ---------- Memory ----------
@@ -545,17 +717,10 @@
     memoryFoundPairs = 0;
     document.getElementById('memory-found').textContent = "0";
 
-    // create cards: image + word for each item
     memoryCards = [];
     items.forEach(item => {
-      memoryCards.push({
-        id: item.id,
-        type: 'image'
-      });
-      memoryCards.push({
-        id: item.id,
-        type: 'word'
-      });
+      memoryCards.push({ id: item.id, type: 'image' });
+      memoryCards.push({ id: item.id, type: 'word' });
     });
 
     shuffleArray(memoryCards);
@@ -594,7 +759,6 @@
       const differentType = first.dataset.type !== second.dataset.type;
 
       if (sameId && differentType) {
-        // match
         setTimeout(() => {
           first.classList.add('matched');
           second.classList.add('matched');
@@ -607,7 +771,6 @@
           }
         }, 300);
       } else {
-        // no match
         setTimeout(() => {
           hideMemoryCard(first);
           hideMemoryCard(second);
@@ -784,14 +947,13 @@
   }
 
   // ---------- Audio helper ----------
-  function playAudio(fileName, storeCallback) {
+  function playAudio(fileName) {
     const url = audioBase + encodeURI(fileName);
     const audio = new Audio(url);
     audio.play().catch(() => {});
-    if (storeCallback) storeCallback(audio);
   }
 
-  // ---------- Utility functions ----------
+  // ---------- Utility ----------
   function shuffleArray(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -799,7 +961,6 @@
     }
   }
 
-  // Remove accents for comparison
   function normalizeLux(str) {
     return str
       .toLowerCase()
@@ -812,8 +973,181 @@
       .replace(/[^a-z]/g, "");
   }
 
+  // ---------- Decorate Tree ----------
+  const decorColors = [
+    { id: "green",  label: "gréng",  hex: "#2ecc71" },
+    { id: "red",    label: "rout",   hex: "#e74c3c" },
+    { id: "blue",   label: "blo",    hex: "#3498db" },
+    { id: "yellow", label: "giel",   hex: "#f1c40f" },
+    { id: "purple", label: "violett",hex: "#9b59b6" },
+    { id: "gold",   label: "gëllef", hex: "#f4d03f" }
+  ];
+
+  // 5 example exercises (only Kugele ginn iwwerpréift)
+  const decorExercises = [
+    {
+      text: "Fierf 5 Kugele gréng, 5 Kugele rout an 5 Kugele blo.",
+      targets: { green: 5, red: 5, blue: 5 }
+    },
+    {
+      text: "Fierf 3 Kugele gréng, 4 Kugele rout, 4 Kugele blo an 4 Kugele giel.",
+      targets: { green: 3, red: 4, blue: 4, yellow: 4 }
+    },
+    {
+      text: "Fierf 6 Kugele gréng, 3 Kugele rout, 3 Kugele blo an 3 Kugele gëllef.",
+      targets: { green: 6, red: 3, blue: 3, gold: 3 }
+    },
+    {
+      text: "Fierf 2 Kugele gréng, 2 Kugele rout, 2 Kugele blo, 2 Kugele giel an 7 Kugele violett.",
+      targets: { green: 2, red: 2, blue: 2, yellow: 2, purple: 7 }
+    },
+    {
+      text: "Fierf 1 Kugel gréng, 2 Kugele rout, 3 Kugele blo, 4 Kugele giel an 5 Kugele gëllef.",
+      targets: { green: 1, red: 2, blue: 3, yellow: 4, gold: 5 }
+    }
+  ];
+
+  let decorCurrentExercise = 0;
+  let decorCurrentColor = decorColors[0].id;
+  let decorBaubles = [];
+  let decorLights = [];
+
+  function initDecorGame() {
+    // Palette
+    const paletteDiv = document.getElementById('decor-palette');
+    if (!paletteDiv.dataset.initialised) {
+      paletteDiv.innerHTML = "";
+      decorColors.forEach(color => {
+        const div = document.createElement('div');
+        div.className = 'palette-color';
+        div.style.background = color.hex;
+        div.dataset.colorId = color.id;
+        div.title = color.label;
+        div.addEventListener('click', () => selectDecorColor(color.id));
+        paletteDiv.appendChild(div);
+      });
+      paletteDiv.dataset.initialised = "true";
+    }
+    selectDecorColor(decorCurrentColor || decorColors[0].id);
+
+    // ornaments
+    const svg = document.getElementById('tree-svg');
+    decorBaubles = Array.from(svg.querySelectorAll('.ornament.bauble'));
+    decorLights  = Array.from(svg.querySelectorAll('.ornament.light'));
+
+    [...decorBaubles, ...decorLights].forEach(el => {
+      el.addEventListener('click', () => colorOrnament(el));
+    });
+
+    loadDecorExercise();
+  }
+
+  function selectDecorColor(colorId) {
+    decorCurrentColor = colorId;
+    const paletteDiv = document.getElementById('decor-palette');
+    paletteDiv.querySelectorAll('.palette-color').forEach(p => {
+      p.classList.toggle('selected', p.dataset.colorId === colorId);
+    });
+  }
+
+  function colorOrnament(el) {
+    const color = decorColors.find(c => c.id === decorCurrentColor);
+    if (!color) return;
+    el.setAttribute('fill', color.hex);
+    if (el.dataset.type === "bauble") {
+      el.dataset.colorId = color.id;
+      // auto-check once all baubles colored
+      if (allBaublesColored()) {
+        checkDecorSolution(true);
+      }
+    } else {
+      // lights dürfen alles sinn, awer gi net kontrolléiert
+      el.dataset.colorId = color.id;
+    }
+  }
+
+  function allBaublesColored() {
+    return decorBaubles.every(b => !!b.dataset.colorId);
+  }
+
+  function resetDecorColors() {
+    decorBaubles.forEach(b => {
+      b.setAttribute('fill', '#ffffff');
+      delete b.dataset.colorId;
+    });
+    decorLights.forEach(l => {
+      l.setAttribute('fill', '#ffffff');
+      delete l.dataset.colorId;
+    });
+    document.getElementById('decor-feedback').textContent = "";
+  }
+
+  function loadDecorExercise() {
+    const ex = decorExercises[decorCurrentExercise];
+    document.getElementById('decor-ex-index').textContent = (decorCurrentExercise + 1).toString();
+    document.getElementById('decor-ex-text').textContent = ex.text;
+    document.getElementById('decor-feedback').textContent = "";
+    resetDecorColors();
+  }
+
+  function nextDecorExercise() {
+    decorCurrentExercise = (decorCurrentExercise + 1) % decorExercises.length;
+    loadDecorExercise();
+  }
+
+  function previousDecorExercise() {
+    decorCurrentExercise = (decorCurrentExercise - 1 + decorExercises.length) % decorExercises.length;
+    loadDecorExercise();
+  }
+
+  function checkDecorSolution(auto = false) {
+    const feedback = document.getElementById('decor-feedback');
+    const ex = decorExercises[decorCurrentExercise];
+
+    if (!allBaublesColored()) {
+      if (!auto) {
+        feedback.textContent = "Fierf fir d'éischt all Kugele, da kanns du kontrolléieren.";
+        feedback.style.color = "#c44141";
+      }
+      return;
+    }
+
+    const counts = {};
+    decorBaubles.forEach(b => {
+      const id = b.dataset.colorId || "none";
+      counts[id] = (counts[id] || 0) + 1;
+    });
+
+    let correct = true;
+
+    decorColors.forEach(color => {
+      const target = ex.targets[color.id] || 0;
+      const actual = counts[color.id] || 0;
+      if (target !== actual) {
+        correct = false;
+      }
+    });
+
+    // assure that there are no unexpected colours (colors with no target but used)
+    Object.keys(counts).forEach(colorId => {
+      if (colorId === "none") return;
+      if (!ex.targets[colorId]) {
+        if (counts[colorId] > 0) correct = false;
+      }
+    });
+
+    if (correct) {
+      feedback.textContent = "Super! D'Kugele si genee richteg gefierft. 🎉";
+      feedback.style.color = "#2f8f46";
+    } else {
+      feedback.textContent = "Nach net ganz richteg… kuck nach eng Kéier op d'Zuele vun de Faarwen.";
+      feedback.style.color = "#c44141";
+    }
+  }
+
   // Start default screen
   showScreen('lauschter');
 </script>
 </body>
 </html>
+
