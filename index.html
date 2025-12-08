@@ -143,35 +143,40 @@
   }
   .treeArea{
     position:relative;width:min(90vw,950px);aspect-ratio:16/9;
-    background:url('https://i.postimg.cc/sDm4HVMQ/chreschtbeemchen-blank.png') center/contain no-repeat;
+    background:url('https://i.postimg.cc/tny3gbgg/chreschtbeemchen-lichterkette.png') center/contain no-repeat;
     border-radius:20px;border:6px solid var(--p2-main);
     box-shadow:0 8px 24px rgba(0,0,0,.08);overflow:visible;
   }
 
-  /* positions based on your layout */
   .pile{
     position:absolute;display:flex;align-items:center;justify-content:center;
     width:60px;height:60px;
   }
+  /* bauble piles left side */
   .pile-blo   {left:5%; top:20%;}
   .pile-rosa  {left:5%; top:35%;}
   .pile-rout  {left:5%; top:50%;}
   .pile-green {left:5%; top:65%;}
   .pile-giel  {left:5%; top:80%;}
 
-  .pile-star-gro   {right:14%; top:10%;}
-  .pile-star-giel  {right:5%; top:10%;}
-  .pile-star-waiss {right:14%; top:25%;}
-  .pile-star-orange{right:5%; top:25%;}
+  /* star piles top right */
+  .pile-star-gro    {right:16%; top:10%;}
+  .pile-star-giel   {right:7%;  top:10%;}
+  .pile-star-waiss  {right:16%; top:24%;}
+  .pile-star-orange {right:7%;  top:24%;}
 
-  .pile-lightA {right:13%; bottom:16%;}
-  .pile-lightB {right:13%; bottom:6%;}
+  /* light piles right side around the string */
+  .pile-l-blo    {right:18%; top:43%;}
+  .pile-l-greng  {right:9%;  top:43%;}
+  .pile-l-mof    {right:18%; top:58%;}
+  .pile-l-orange {right:9%;  top:58%;}
+  .pile-l-waiss  {right:13.5%; top:73%;}
 
   .decItem{
     width:46px;height:46px;object-fit:contain;cursor:grab;
     position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
   }
-  .decItem.small{width:60px;height:60px;}
+  .decItem.small{width:40px;height:40px;}
   .decItem.star{width:54px;height:54px;}
 
   .treeDropZone{
@@ -278,9 +283,12 @@
       <div class="pile pile-star-waiss"  id="pile-star-waiss"></div>
       <div class="pile pile-star-orange" id="pile-star-orange"></div>
 
-      <!-- Lights -->
-      <div class="pile pile-lightA" id="pile-lightA"></div>
-      <div class="pile pile-lightB" id="pile-lightB"></div>
+      <!-- Lights (bulbs) -->
+      <div class="pile pile-l-blo"    id="pile-l-blo"></div>
+      <div class="pile pile-l-greng"  id="pile-l-greng"></div>
+      <div class="pile pile-l-mof"    id="pile-l-mof"></div>
+      <div class="pile pile-l-orange" id="pile-l-orange"></div>
+      <div class="pile pile-l-waiss"  id="pile-l-waiss"></div>
     </div>
     <div class="treeTaskBox" id="treeTaskText"></div>
     <div class="treeControls">
@@ -540,9 +548,12 @@ const STAR_COLOURS=[
   {id:'orange', label:'orange', img:'https://i.postimg.cc/BL66k2mZ/s-orange.png', pile:'pile-star-orange'}
 ];
 
-const LIGHT_TYPES=[
-  {id:'A', img:'https://i.postimg.cc/R6FFywgm/l-mof-blo-orange.png', pile:'pile-lightA'},
-  {id:'B', img:'https://i.postimg.cc/6233gCMw/l-rout-giel-greng.png', pile:'pile-lightB'}
+const LIGHT_COLOURS=[
+  {id:'blo', label:'blo', img:'https://i.postimg.cc/307Xwhwk/luucht-blo.png', pile:'pile-l-blo'},
+  {id:'greng', label:'gréng', img:'https://i.postimg.cc/XB3fvWvq/luucht-greng.png', pile:'pile-l-greng'},
+  {id:'mof', label:'mof', img:'https://i.postimg.cc/64wrQKQT/luucht-mof.png', pile:'pile-l-mof'},
+  {id:'orange', label:'orange', img:'https://i.postimg.cc/zH5CfNfL/luucht-orange.png', pile:'pile-l-orange'},
+  {id:'waiss', label:'wäiss', img:'https://i.postimg.cc/SYq6K4K2/luucht-waiss.png', pile:'pile-l-waiss'}
 ];
 
 let decorIdCounter=0;
@@ -561,6 +572,8 @@ function createTreeStocks(){
       img.dataset.kind='bauble';
       img.dataset.color=col.id;
       img.dataset.home=col.pile;
+      img.dataset.inTree='false';
+      img.dataset.onStarZone='false';
       img.id=newDecorId();
       attachDecorDrag(img);
       pile.appendChild(img);
@@ -577,22 +590,26 @@ function createTreeStocks(){
     img.dataset.kind='star';
     img.dataset.color=sc.id;
     img.dataset.home=sc.pile;
+    img.dataset.inTree='false';
+    img.dataset.onStarZone='false';
     img.id=newDecorId();
     attachDecorDrag(img);
     pile.appendChild(img);
   });
 
-  LIGHT_TYPES.forEach(lt=>{
-    const pile=document.getElementById(lt.pile);
+  LIGHT_COLOURS.forEach(lc=>{
+    const pile=document.getElementById(lc.pile);
     pile.innerHTML='';
-    for(let i=0;i<3;i++){
+    for(let i=0;i<10;i++){      /* plenty in stock, task itself max 10 */
       const img=document.createElement('img');
-      img.src=lt.img; img.alt='Chrëschtluuchten';
+      img.src=lc.img; img.alt='Luucht';
       img.className='decItem small';
       img.draggable=true;
       img.dataset.kind='light';
-      img.dataset.light=lt.id;
-      img.dataset.home=lt.pile;
+      img.dataset.color=lc.id;
+      img.dataset.home=lc.pile;
+      img.dataset.inTree='false';
+      img.dataset.onStarZone='false';
       img.id=newDecorId();
       attachDecorDrag(img);
       pile.appendChild(img);
@@ -632,16 +649,7 @@ treeArea.addEventListener('drop',e=>{
   const el=document.getElementById(id);
   if(!el) return;
 
-  const kind=el.dataset.kind;
-  if(kind==='light'){
-    const counts=countLightsInTree();
-    if(counts.total>=2){
-      flash(el,false);
-      return;
-    }
-  }
-
-  const rect=treeDropZone.getBoundingClientRect();
+  const rectTree=treeDropZone.getBoundingClientRect();
   const containerRect=treeArea.getBoundingClientRect();
   const x=e.clientX-containerRect.left;
   const y=e.clientY-containerRect.top;
@@ -655,7 +663,7 @@ treeArea.addEventListener('drop',e=>{
 
   const starRect=starDropZone.getBoundingClientRect();
   const cx=e.clientX, cy=e.clientY;
-  el.dataset.onStarZone = (kind==='star' &&
+  el.dataset.onStarZone = (el.dataset.kind==='star' &&
     cx>=starRect.left && cx<=starRect.right &&
     cy>=starRect.top && cy<=starRect.bottom) ? 'true' : 'false';
 });
@@ -675,9 +683,7 @@ function resetAllDecor(){
   treeFeedback.textContent='';
 }
 
-/* task generation */
-let currentTask=null;
-
+/* helper: number words */
 function numWord(n){
   if(n===2) return 'zwou';
   const map={
@@ -688,7 +694,10 @@ function numWord(n){
   return map[n]||String(n);
 }
 
-/* ensures first colour has count >1 */
+/* task generation */
+let currentTask=null;
+
+/* bauble task – same logic as before */
 function buildBaubleTask(){
   const nColours=Math.floor(Math.random()*5)+1; // 1–5
   const cols=shuffle([...BAUBLE_COLOURS]).slice(0,nColours);
@@ -712,22 +721,75 @@ function buildBaubleTask(){
   return {counts, order:ordered};
 }
 
-function buildLightTask(){
-  const mode=Math.floor(Math.random()*3)+1;
-  let text='', target={A:0,B:0};
-  if(mode===1){
-    text="D'Chrëschtluuchte sinn all orange, blo, mof.";
-    target.A=2; target.B=0;
-  }else if(mode===2){
-    text="D'Chrëschtluuchte sinn all rout, giel, gréng.";
-    target.A=0; target.B=2;
+function buildBaubleSentence(b){
+  const counts=b.counts;
+  const order=b.order;
+  const parts=[];
+  order.forEach(cid=>{
+    const count=counts[cid];
+    const colInfo=BAUBLE_COLOURS.find(c=>c.id===cid);
+    const num = count===1 ? 'eng' : numWord(count);
+    const noun=count===1?'Chrëschtbull':'Chrëschtbullen';
+    parts.push(`${num} ${colInfo.label} ${noun}`);
+  });
+
+  let s='Um Chrëschtbeemche sinn ';
+  if(parts.length===1){
+    s+=parts[0]+'.';
   }else{
-    text="D'Luuchte sinn orange, blo, mof, rout, giel a gréng.";
-    target.A=1; target.B=1;
+    const last=parts.pop();
+    s+=parts.join(', ')+' an '+last+'.';
   }
-  return {mode, text, target};
+  return s;
 }
 
+/* light task: similar to baubles, but total <=10 */
+function buildLightTask(){
+  const nColours=Math.floor(Math.random()*3)+1; // 1–3 colours so counts stay small
+  const cols=shuffle([...LIGHT_COLOURS]).slice(0,nColours);
+  const maxTotal=10;
+  const minTotal=nColours;
+  let total=minTotal+Math.floor(Math.random()*(maxTotal-minTotal+1));
+  const counts={};
+  cols.forEach(c=>counts[c.id]=1);
+  let leftover=total-nColours;
+  const ids=cols.map(c=>c.id);
+  while(leftover>0){
+    const id=ids[Math.floor(Math.random()*(ids.length))];
+    if(counts[id]<6){ counts[id]++; leftover--; }
+  }
+  let firstId=ids.find(id=>counts[id]>1);
+  if(!firstId){
+    firstId=ids[0];
+    counts[firstId]=2;
+  }
+  const ordered=[firstId,...ids.filter(id=>id!==firstId)];
+  return {counts, order:ordered};
+}
+
+function buildLightSentence(L){
+  const counts=L.counts;
+  const order=L.order;
+  const parts=[];
+  order.forEach(cid=>{
+    const count=counts[cid];
+    const colInfo=LIGHT_COLOURS.find(c=>c.id===cid);
+    const num = count===1 ? 'eng' : numWord(count);
+    const noun=count===1?'Luucht':'Luuchten';
+    parts.push(`${num} ${colInfo.label} ${noun}`);
+  });
+
+  let s='Ausserdeem sinn do ';
+  if(parts.length===1){
+    s+=parts[0]+'.';
+  }else{
+    const last=parts.pop();
+    s+=parts.join(', ')+' an '+last+'.';
+  }
+  return s;
+}
+
+/* star task as before */
 function buildStarTask(){
   const requireStar=Math.random()<0.5;
   if(!requireStar) return {required:false,color:null,text:''};
@@ -737,44 +799,25 @@ function buildStarTask(){
 }
 
 function buildTreeTask(){
-  const b=buildBaubleTask();
-  const counts=b.counts;
-  const order=b.order;
+  const bTask=buildBaubleTask();
+  const lTask=buildLightTask();
+  const sTask=buildStarTask();
 
-  const parts=[];
-  order.forEach(cid=>{
-    const count=counts[cid];
-    const colInfo=BAUBLE_COLOURS.find(c=>c.id===cid);
-    const numWordLocal = count===1 ? 'eng' : numWord(count);
-    const noun=count===1?'Chrëschtbull':'Chrëschtbullen';
-    parts.push(`${numWordLocal} ${colInfo.label} ${noun}`);
-  });
-
-  let baubleSentence='Um Chrëschtbeemche sinn ';
-  if(parts.length===1){
-    // if only one colour, make sure count >1 already guaranteed
-    baubleSentence+=parts[0]+'.';
-  }else{
-    const last=parts.pop();
-    baubleSentence+=parts.join(', ')+' an '+last+'.';
-  }
-
-  const lightPart=buildLightTask();
-  const starPart=buildStarTask();
-
-  const fullText=baubleSentence+' '+lightPart.text+(starPart.text?(' '+starPart.text):'');
+  const baubleSentence=buildBaubleSentence(bTask);
+  const lightSentence=buildLightSentence(lTask);
+  const fullText = baubleSentence+' '+lightSentence+(sTask.text?(' '+sTask.text):'');
 
   currentTask={
-    baubles:counts,
-    lightTarget:lightPart.target,
-    starRequired:starPart.required,
-    starColor:starPart.color
+    baubles:bTask.counts,
+    lights:lTask.counts,
+    starRequired:sTask.required,
+    starColor:sTask.color
   };
   treeTaskText.textContent=fullText;
   treeFeedback.textContent='';
 }
 
-/* counts */
+/* count helpers */
 function countBaublesInTree(){
   const res={};
   document.querySelectorAll('.decItem[data-kind="bauble"]').forEach(el=>{
@@ -785,15 +828,14 @@ function countBaublesInTree(){
   });
   return res;
 }
-function countLightsInTree(){
-  const res={A:0,B:0};
+function countLightsInTreeDetailed(){
+  const res={};
   document.querySelectorAll('.decItem[data-kind="light"]').forEach(el=>{
     if(el.dataset.inTree==='true'){
-      const t=el.dataset.light;
-      res[t]=(res[t]||0)+1;
+      const col=el.dataset.color;
+      res[col]=(res[col]||0)+1;
     }
   });
-  res.total=res.A+res.B;
   return res;
 }
 function getStarsInTree(){
@@ -805,19 +847,29 @@ function checkTree(){
   let ok=true;
 
   const baCounts=countBaublesInTree();
-  const needed=currentTask.baubles;
-  const neededCols=Object.keys(needed);
+  const neededBa=currentTask.baubles;
+  const neededColsBa=Object.keys(neededBa);
 
-  neededCols.forEach(cid=>{
-    if((baCounts[cid]||0)!==needed[cid]) ok=false;
+  neededColsBa.forEach(cid=>{
+    if((baCounts[cid]||0)!==neededBa[cid]) ok=false;
   });
   Object.keys(baCounts).forEach(cid=>{
-    if(!needed[cid]) ok=false;
+    if(!neededBa[cid]) ok=false;
   });
 
-  const lights=countLightsInTree();
-  if(lights.total!==2) ok=false;
-  if(lights.A!==currentTask.lightTarget.A || lights.B!==currentTask.lightTarget.B) ok=false;
+  const lightCounts=countLightsInTreeDetailed();
+  const neededLight=currentTask.lights;
+  const neededColsL=Object.keys(neededLight);
+
+  let totalLights=0;
+  neededColsL.forEach(cid=>{
+    totalLights+=neededLight[cid];
+    if((lightCounts[cid]||0)!==neededLight[cid]) ok=false;
+  });
+  Object.keys(lightCounts).forEach(cid=>{
+    if(!neededLight[cid]) ok=false;
+  });
+  if(totalLights>10) ok=false; // safety, should not happen by construction
 
   const stars=getStarsInTree();
   if(currentTask.starRequired){
