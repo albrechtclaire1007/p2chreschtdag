@@ -22,7 +22,13 @@
   }
 
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent; user-select:none; outline:none;}
-  html,body{height:100%; margin:0; background:linear-gradient(135deg,var(--p2-soft),#c9e4c3); color:var(--ink); font-family:'Schoulschrëft', Arial, sans-serif;}
+  html,body{
+    height:100%; margin:0;
+    background:linear-gradient(135deg,var(--p2-soft),#c9e4c3);
+    color:var(--ink);
+    font-family:'Schoulschrëft', Arial, sans-serif;
+  }
+  button,.btn,.iconBtn{font-family:'Schoulschrëft', Arial, sans-serif;}
 
   /* --- NAV --- */
   .top{
@@ -31,96 +37,182 @@
     padding:.35rem .8rem; margin:10px auto; width:fit-content;
     box-shadow:0 8px 24px rgba(0,0,0,.08);
   }
-  .iconBtn{border:var(--border) solid var(--ink); background:var(--white); color:var(--ink);
+  .iconBtn{
+    border:var(--border) solid var(--ink); background:var(--white); color:var(--ink);
     padding:.25rem .7rem; border-radius:14px; cursor:pointer; font-size:1.4rem; line-height:1;
-    min-width:2.4rem; display:grid; place-items:center;}
+    min-width:2.4rem; display:grid; place-items:center;
+  }
   .iconBtn:active{transform:scale(.98);}
   .flow{opacity:.9; font-size:1rem; padding:0 .4rem; min-width:9ch; text-align:center;}
   .hidden{display:none!important;}
 
-  .wrap{min-height:100%; display:flex; flex-direction:column; align-items:center; gap:2.2vmin; padding:2.2vmin 3vmin 4vmin;}
-  h1{margin:.2rem 0 0; text-align:center; font-size:clamp(2rem,6vmin,4.2rem); color:var(--ink);}
+  .wrap{
+    min-height:100%; display:flex; flex-direction:column; align-items:center;
+    gap:1.8vmin; padding:1.8vmin 3vmin 3vmin;
+  }
+  h1{
+    margin:.2rem 0 0; text-align:center;
+    font-size:clamp(2rem,5.4vmin,3.6rem); color:var(--ink);
+  }
 
   /* Buttons & feedback */
-  .btn{border:var(--border) solid var(--ink); background:#fff; color:#000;
-    padding:.45rem .85rem; border-radius:14px; cursor:pointer; font-size:1.05rem;}
+  .btn{
+    border:var(--border) solid var(--ink); background:#fff; color:#000;
+    padding:.45rem .85rem; border-radius:14px; cursor:pointer; font-size:1.05rem;
+  }
   .btn.green{background:var(--p2-main); color:#fff; border-color:var(--p2-dark);}
   .btn.red{background:#ff6b6b; color:#fff; border-color:#c94f4f;}
   .btn:active{transform:scale(.98);}
   .flash-good{background:var(--ok)!important;border-color:var(--ok)!important;}
   .flash-bad{background:var(--bad)!important;border-color:var(--bad)!important;}
 
+  .feedback-line,.treeFeedback{min-height:1.6rem;font-size:1rem;margin-top:6px;text-align:center;}
+
   /* --- Game 1 grid --- */
-  .grid{width:95vw; max-width:2000px; display:grid; gap:2vmin;
-    grid-template-columns:repeat(auto-fill,minmax(14vmin,1fr)); align-items:stretch;}
-  .imgToken{background:#fff; border:6px solid var(--p2-main); border-radius:22px;
+  .grid{
+    width:95vw; max-width:2000px; display:grid; gap:2vmin;
+    grid-template-columns:repeat(auto-fill,minmax(14vmin,1fr)); align-items:stretch;
+  }
+  .imgToken{
+    background:#fff; border:6px solid var(--p2-main); border-radius:22px;
     display:grid; place-items:center; aspect-ratio:1/1; cursor:pointer;
-    box-shadow:0 10px 26px rgba(0,0,0,.08); transition:.1s;}
+    box-shadow:0 10px 26px rgba(0,0,0,.08); transition:.1s;
+  }
   .imgToken img{width:90%; height:90%; object-fit:contain;}
   .imgToken:active{transform:scale(.97);}
 
   /* --- Game 2 memory --- */
-  .memGrid{width:95vw; max-width:1200px; display:grid; gap:1.4vmin;
-    grid-template-columns:repeat(auto-fill,minmax(18vmin,1fr));}
-  .card{aspect-ratio:4/3; perspective:1000px; cursor:pointer;}
+  .memGrid{
+    width:95vw; max-width:1100px; display:grid; gap:1.6vmin;
+    grid-template-columns:repeat(auto-fill,minmax(20vmin,1fr));
+    justify-items:center;
+  }
+  .card{aspect-ratio:4/3; perspective:1000px; cursor:pointer; width:100%;}
   .inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:.25s;}
   .flipped .inner{transform:rotateY(180deg);}
-  .face{position:absolute;inset:0;border-radius:18px;border:6px solid var(--p2-main);
+  .face{
+    position:absolute;inset:0;border-radius:18px;border:6px solid var(--p2-main);
     backface-visibility:hidden;display:grid;place-items:center;background:#fff;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);}
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+  }
   .front{background:#fff url('https://i.postimg.cc/xCGJMcww/p2-card-back.png') center/70% no-repeat;}
   .back{transform:rotateY(180deg);}
-  .sndWord{font-size:clamp(1.4rem,3.6vmin,2.2rem);padding:.3rem .6rem;text-align:center;}
+  .sndWord{
+    font-size:clamp(1.6rem,3.6vmin,2.4rem);padding:.3rem .6rem;text-align:center;
+  }
 
-  /* --- Game 3: write the word --- */
-  .row{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:6px;flex-wrap:wrap;}
-  .toy-image{width:200px;height:200px;object-fit:contain;background:#fff;border-radius:18px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);}
-  .audio-img{width:64px;height:64px;cursor:pointer;transition:.15s;}
+  /* --- Game 3: Schreif d'Wuert --- */
+  .row{
+    display:flex;align-items:center;justify-content:center;
+    gap:16px;margin-top:6px;flex-wrap:wrap;
+  }
+  .toy-image{
+    width:200px;height:200px;object-fit:contain;background:#fff;border-radius:18px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+  }
+  .audio-img{
+    width:70px;height:70px;cursor:pointer;transition:.15s;
+    border-radius:50%;background:var(--p2-main);border:5px solid var(--p2-dark);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .audio-img img{width:60%;height:60%;object-fit:contain;}
   .audio-img:active{transform:scale(.96);}
-  .answer-slots{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:8px;}
-  .slot{width:56px;height:56px;border:4px dashed #bcdcbc;border-radius:14px;display:flex;
-    align-items:center;justify-content:center;font-size:28px;font-weight:700;background:#f9f9f9;cursor:pointer;}
+  .answer-slots{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:8px;
+  }
+  .slot{
+    width:56px;height:56px;border:4px dashed #bcdcbc;border-radius:14px;display:flex;
+    align-items:center;justify-content:center;font-size:28px;font-weight:700;background:#f9f9f9;cursor:pointer;
+  }
   .slot.filled{border-color:var(--p2-main);background:var(--p2-soft);}
-  .letter-bank{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;padding:16px;background:#f8f8f8;border-radius:15px;max-width:800px;}
-  .tile{width:56px;height:56px;background:#fff;border:2px solid #ddd;border-radius:14px;
-    display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;cursor:grab;box-shadow:0 2px 6px rgba(0,0,0,.1);}
+  .letter-bank{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:10px;
+    padding:10px 12px;background:#f8f8f8;border-radius:15px;max-width:800px;margin-top:4px;
+  }
+  .tile{
+    width:56px;height:56px;background:#fff;border:2px solid #ddd;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;
+    cursor:grab;box-shadow:0 2px 6px rgba(0,0,0,.1);
+  }
   .tile.used{opacity:.3;pointer-events:none;}
 
-  .feedback-line{min-height:1.6rem;font-size:1rem;margin-top:8px;text-align:center;}
+  /* --- Game 4: Tree decoration --- */
+  .treeGame{
+    width:100%;max-width:1100px;display:flex;flex-direction:column;
+    align-items:center;gap:8px;
+  }
+  .treeArea{
+    position:relative;width:min(90vw,950px);aspect-ratio:16/9;
+    background:url('https://i.postimg.cc/sDm4HVMQ/chreschtbeemchen-blank.png') center/contain no-repeat;
+    border-radius:20px;border:6px solid var(--p2-main);
+    box-shadow:0 8px 24px rgba(0,0,0,.08);overflow:visible;
+  }
 
-  /* --- Game 4: Riddles --- */
-  .riddle-box{max-width:900px;margin-top:10px;font-size:clamp(1.6rem,4.2vw,2.4rem);text-align:center;
-    background:#fff;border-radius:18px;border:6px solid var(--p2-main);padding:.5rem .8rem;box-shadow:0 6px 18px rgba(0,0,0,.08);}
-  .riddleGrid{width:95vw;max-width:1200px;display:grid;gap:2vmin;
-    grid-template-columns:repeat(auto-fill,minmax(16vmin,1fr));margin-top:16px;}
-  .ridCard{background:#fff;border:6px solid var(--p2-main);border-radius:22px;display:grid;place-items:center;
-    aspect-ratio:1/1;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,.08);transition:.1s;}
+  /* positions based on your layout */
+  .pile{
+    position:absolute;display:flex;align-items:center;justify-content:center;
+    width:60px;height:60px;
+  }
+  .pile-blo   {left:5%; top:20%;}
+  .pile-rosa  {left:5%; top:35%;}
+  .pile-rout  {left:5%; top:50%;}
+  .pile-green {left:5%; top:65%;}
+  .pile-giel  {left:5%; top:80%;}
+
+  .pile-star-gro   {right:14%; top:10%;}
+  .pile-star-giel  {right:5%; top:10%;}
+  .pile-star-waiss {right:14%; top:25%;}
+  .pile-star-orange{right:5%; top:25%;}
+
+  .pile-lightA {right:13%; bottom:16%;}
+  .pile-lightB {right:13%; bottom:6%;}
+
+  .decItem{
+    width:46px;height:46px;object-fit:contain;cursor:grab;
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  }
+  .decItem.small{width:60px;height:60px;}
+  .decItem.star{width:54px;height:54px;}
+
+  .treeDropZone{
+    position:absolute;left:18%;right:18%;top:12%;bottom:18%; /* tree area */
+  }
+  .starDropZone{
+    position:absolute;left:42%;right:42%;top:7%;height:14%;
+  }
+
+  .treeTaskBox{
+    background:#fff;border-radius:18px;border:6px solid var(--p2-main);
+    padding:.4rem .8rem;font-size:clamp(1.4rem,3.5vmin,2rem);
+    box-shadow:0 6px 18px rgba(0,0,0,.08);max-width:1000px;
+  }
+  .treeControls{
+    display:flex;gap:10px;justify-content:center;margin-top:4px;flex-wrap:wrap;
+  }
+
+  /* --- Game 5: Riddles (Wie sinn ech?) --- */
+  .riddle-box{
+    max-width:900px;margin-top:10px;
+    font-size:clamp(1.6rem,4.2vw,2.4rem);text-align:center;
+    background:#fff;border-radius:18px;border:6px solid var(--p2-main);
+    padding:.5rem .8rem;box-shadow:0 6px 18px rgba(0,0,0,.08);
+  }
+  .riddleGrid{
+    width:95vw;max-width:900px;
+    display:flex;flex-wrap:wrap;justify-content:center;
+    gap:2vmin;margin-top:16px;
+  }
+  .ridCard{
+    background:#fff;border:6px solid var(--p2-main);border-radius:22px;
+    display:grid;place-items:center;cursor:pointer;
+    box-shadow:0 10px 26px rgba(0,0,0,.08);transition:.1s;
+    width:min(28vmin,260px);aspect-ratio:1/1;
+  }
   .ridCard img{width:90%;height:90%;object-fit:contain;}
   .ridCard:active{transform:scale(.97);}
 
-  /* --- Game 5: Tree decoration --- */
-  .treeLayout{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;align-items:flex-start;width:100%;}
-  .treeArea{position:relative;width:min(70vmin,380px);aspect-ratio:3/4;background:#f5fff3;border-radius:24px;
-    border:6px solid var(--p2-main);box-shadow:0 8px 24px rgba(0,0,0,.08);overflow:hidden;display:flex;align-items:center;justify-content:center;}
-  .treeArea img.treeBase{width:92%;height:auto;object-fit:contain;pointer-events:none;}
-  .starDropZone{position:absolute;top:4%;left:0;right:0;height:18%;pointer-events:none;}
-
-  .paletteCol{flex:1;min-width:260px;max-width:360px;display:flex;flex-direction:column;gap:10px;}
-  .taskBox{background:#fff;border-radius:18px;border:6px solid var(--p2-main);padding:.5rem .8rem;
-    font-size:clamp(1.4rem,3.6vw,2rem);box-shadow:0 6px 18px rgba(0,0,0,.08);}
-  .stockBlock{background:#f8f8f8;border-radius:16px;padding:8px 10px;display:flex;flex-direction:column;gap:6px;}
-  .stockTitle{font-size:1.1rem;margin-bottom:2px;}
-  .stockRow{display:flex;flex-wrap:wrap;gap:4px;}
-  .decItem{width:40px;height:40px;object-fit:contain;cursor:grab;}
-  .decItem.small{width:34px;height:34px;}
-  .decItem.star{width:42px;height:42px;}
-
-  .treeControls{display:flex;gap:10px;justify-content:center;margin-top:6px;flex-wrap:wrap;}
-  .treeFeedback{min-height:1.6rem;font-size:1rem;margin-top:6px;text-align:center;}
-
-  @media (max-width:600px){
-    h1{font-size:clamp(1.7rem,5.5vmin,3.2rem);}
+  @media (max-width:700px){
+    .treeArea{width:96vw;}
   }
 </style>
 </head>
@@ -146,12 +238,14 @@
   <div><button class="btn" id="memReset">Nei mëschen</button></div>
 </section>
 
-<!-- Spill 3: Schreif d'Wuert (Tiles) -->
+<!-- Spill 3: Schreif d'Wuert -->
 <section class="wrap hidden" id="g3">
   <h1>Schreif d'Wuert</h1>
   <div class="row">
     <img id="wImage" class="toy-image" alt="">
-    <img id="wPlayIcon" class="audio-img" src="https://i.postimg.cc/kXzQdjQp/temp-Imagef0iu-HC.avif" alt="Toun ofspillen" role="button" tabindex="0">
+    <div class="audio-img" id="wPlayIcon" role="button" tabindex="0">
+      <img src="https://i.postimg.cc/kXzQdjQp/temp-Imagef0iu-HC.avif" alt="Toun ofspillen">
+    </div>
   </div>
   <div id="wAnswer" class="answer-slots"></div>
   <div id="wBank" class="letter-bank"></div>
@@ -163,48 +257,46 @@
   </div>
 </section>
 
-<!-- Spill 4: Wien oder wat sinn ech? -->
+<!-- Spill 4: Chrëschtbeemche dekoréieren -->
 <section class="wrap hidden" id="g4">
+  <h1>Chrëschtbeemche dekoréieren</h1>
+  <div class="treeGame">
+    <div class="treeArea" id="treeArea">
+      <div class="treeDropZone" id="treeDropZone"></div>
+      <div class="starDropZone" id="starDropZone"></div>
+
+      <!-- Bauble piles -->
+      <div class="pile pile-blo"   id="pile-blo"></div>
+      <div class="pile pile-rosa"  id="pile-rosa"></div>
+      <div class="pile pile-rout"  id="pile-rout"></div>
+      <div class="pile pile-green" id="pile-green"></div>
+      <div class="pile pile-giel"  id="pile-giel"></div>
+
+      <!-- Stars -->
+      <div class="pile pile-star-gro"    id="pile-star-gro"></div>
+      <div class="pile pile-star-giel"   id="pile-star-giel"></div>
+      <div class="pile pile-star-waiss"  id="pile-star-waiss"></div>
+      <div class="pile pile-star-orange" id="pile-star-orange"></div>
+
+      <!-- Lights -->
+      <div class="pile pile-lightA" id="pile-lightA"></div>
+      <div class="pile pile-lightB" id="pile-lightB"></div>
+    </div>
+    <div class="treeTaskBox" id="treeTaskText"></div>
+    <div class="treeControls">
+      <button class="btn red" id="treeReset">alles zrécksetzen</button>
+      <button class="btn green" id="treeCheck">kontrolléieren</button>
+    </div>
+    <div class="treeFeedback" id="treeFeedback"></div>
+  </div>
+</section>
+
+<!-- Spill 5: Wien oder wat sinn ech? -->
+<section class="wrap hidden" id="g5">
   <h1>Wien oder wat sinn ech?</h1>
   <div class="riddle-box" id="riddleText"></div>
   <div class="riddleGrid" id="riddleGrid"></div>
   <div class="feedback-line" id="riddleFeedback"></div>
-</section>
-
-<!-- Spill 5: Chrëschtbam dekoréieren -->
-<section class="wrap hidden" id="g5">
-  <h1>Chrëschtbeemche dekoréieren</h1>
-  <div class="treeLayout">
-    <div class="treeArea" id="treeArea">
-      <img class="treeBase" src="https://i.postimg.cc/sDm4HVMQ/chreschtbeemchen-blank.png" alt="Chrëschtbeemchen">
-      <div class="starDropZone" id="starDropZone"></div>
-    </div>
-    <div class="paletteCol">
-      <div class="taskBox" id="treeTaskText"></div>
-      <div class="stockBlock">
-        <div class="stockTitle">Chrëschtbullen</div>
-        <div class="stockRow" id="stock-blo"></div>
-        <div class="stockRow" id="stock-rosa"></div>
-        <div class="stockRow" id="stock-rout"></div>
-        <div class="stockRow" id="stock-greeng"></div>
-        <div class="stockRow" id="stock-giel"></div>
-      </div>
-      <div class="stockBlock">
-        <div class="stockTitle">Chrëschtluuchten</div>
-        <div class="stockRow" id="stock-lightA"></div>
-        <div class="stockRow" id="stock-lightB"></div>
-      </div>
-      <div class="stockBlock">
-        <div class="stockTitle">Stären</div>
-        <div class="stockRow" id="stock-star"></div>
-      </div>
-      <div class="treeControls">
-        <button class="btn red" id="treeReset">alles zrécksetzen</button>
-        <button class="btn green" id="treeCheck">kontrolléieren</button>
-      </div>
-      <div class="treeFeedback" id="treeFeedback"></div>
-    </div>
-  </div>
 </section>
 
 <audio id="speaker" preload="auto" playsinline></audio>
@@ -215,18 +307,18 @@ const AUDIO_BASE="https://github.com/albrechtclaire1007/p2chreschtdag/raw/refs/h
 const speaker=document.getElementById('speaker');
 
 const ITEMS=[
-  {id:'chreschtbull',word:'Chreschtbull',label:"d'Chrëschtbull",img:'https://i.postimg.cc/jwp1BMCp/chreschtbull.png',audio:`${AUDIO_BASE}/P2_Chreschtbull.mp3`},
-  {id:'chreschtluuchten',word:'Chreschtluuchten',label:"d'Chrëschtluuchten",img:'https://i.postimg.cc/xcS7RpwM/chreschtluuchten.png',audio:`${AUDIO_BASE}/P2_Chreschtluuchten.mp3`},
-  {id:'kaddo',word:'Kaddo',label:'de Kaddo',img:'https://i.postimg.cc/3k8qM4JQ/kaddo.png',audio:`${AUDIO_BASE}/P2_Kaddo.mp3`},
-  {id:'kleeschen',word:'Kleeschen',label:'de Kleeschen',img:'https://i.postimg.cc/PLF9QXHp/kleeschen.png',audio:`${AUDIO_BASE}/P2_Kleeschen.mp3`},
-  {id:'schnei',word:'Schnéi',label:"d'Schnéi",img:'https://i.postimg.cc/KRyVNp6K/schnei.png',audio:`${AUDIO_BASE}/P2_Schnei.mp3`},
-  {id:'adventskranz',word:'Adventskranz',label:'den Adventskranz',img:'https://i.postimg.cc/nMFbfhVx/adventskranz.png',audio:`${AUDIO_BASE}/P2_Adventskranz.mp3`},
-  {id:'chreschtbeemchen',word:'Chrëschtbeemchen',label:"de Chrëschtbeemchen",img:'https://i.postimg.cc/QBQPvRR9/chreschtbeemchen.png',audio:`${AUDIO_BASE}/P2_Chreschtbeemchen.mp3`},
-  {id:'engel',word:'Engel',label:'den Engel',img:'https://i.postimg.cc/VrFx03gd/engel.png',audio:`${AUDIO_BASE}/P2_Engel.mp3`},
-  {id:'kichelchen',word:'Kichelchen',label:"d'Kichelchen",img:'https://i.postimg.cc/xkv7BWWX/kichelchen.png',audio:`${AUDIO_BASE}/P2_Kichelcher.mp3`},
+  {id:'chreschtbull',word:'Chrëschtbull',label:"d'Chrëschtbull",img:'https://i.postimg.cc/jwp1BMCp/chreschtbull.png',audio:`${AUDIO_BASE}/P2_chrëschtbullen.mp3`},
+  {id:'chreschtluuchten',word:'Chrëschtluuchten',label:"d'Chrëschtluuchten",img:'https://i.postimg.cc/xcS7RpwM/chreschtluuchten.png',audio:`${AUDIO_BASE}/P2_chrëschtluucht.mp3`},
+  {id:'kaddo',word:'Kaddo',label:'de Kaddo',img:'https://i.postimg.cc/3k8qM4JQ/kaddo.png',audio:`${AUDIO_BASE}/P2_kaddo.mp3`},
+  {id:'kleeschen',word:'Kleeschen',label:'de Kleeschen',img:'https://i.postimg.cc/PLF9QXHp/kleeschen.png',audio:`${AUDIO_BASE}/P2_kleeschen.mp3`},
+  {id:'schnei',word:'Schnéi',label:"d'Schnéi",img:'https://i.postimg.cc/KRyVNp6K/schnei.png',audio:`${AUDIO_BASE}/P2_schnéi.mp3`},
+  {id:'adventskranz',word:'Adventskranz',label:'den Adventskranz',img:'https://i.postimg.cc/nMFbfhVx/adventskranz.png',audio:`${AUDIO_BASE}/P2_adventskranz.mp3`},
+  {id:'chreschtbeemchen',word:'Chrëschtbeemchen',label:"de Chrëschtbeemchen",img:'https://i.postimg.cc/QBQPvRR9/chreschtbeemchen.png',audio:`${AUDIO_BASE}/P2_chrëschtbeemchen.mp3`},
+  {id:'engel',word:'Engel',label:'den Engel',img:'https://i.postimg.cc/VrFx03gd/engel.png',audio:`${AUDIO_BASE}/P2_engel.mp3`},
+  {id:'kichelchen',word:'Kichelchen',label:"d'Kichelchen",img:'https://i.postimg.cc/xkv7BWWX/kichelchen.png',audio:`${AUDIO_BASE}/P2_kichelcher.mp3`},
   {id:'putsch',word:'Putsch',label:'de Putsch',img:'https://i.postimg.cc/6TWJxp66/putsch.png',audio:`${AUDIO_BASE}/P2_Putsch.mp3`},
-  {id:'staer',word:'Stär',label:'de Stär',img:'https://i.postimg.cc/MMYCfh5c/staer.png',audio:`${AUDIO_BASE}/P2_Staer.mp3`},
-  {id:'kaerz',word:'Käerz',label:"d'Käerz",img:'https://i.postimg.cc/Bv53dHNf/kaerz.png',audio:`${AUDIO_BASE}/P2_Kaerz.mp3`}
+  {id:'staer',word:'Stär',label:'de Stär',img:'https://i.postimg.cc/MMYCfh5c/staer.png',audio:`${AUDIO_BASE}/P2_staer.mp3`},
+  {id:'kaerz',word:'Käerz',label:"d'Käerz",img:'https://i.postimg.cc/Bv53dHNf/kaerz.png',audio:`${AUDIO_BASE}/P2_käerz.mp3`}
 ];
 
 /* ---------- UTIL ---------- */
@@ -276,7 +368,7 @@ play1.onclick=()=>{ if(target1) playSound(target1.audio); };
 const memGrid=document.getElementById('memGrid');
 const memReset=document.getElementById('memReset');
 let lockMem=false, firstPick=null, solved=0;
-const MEM_ITEMS=[...ITEMS]; // all xmas items
+const MEM_ITEMS=[...ITEMS];
 
 function buildMemory(){
   memGrid.innerHTML=""; lockMem=false; firstPick=null; solved=0;
@@ -320,10 +412,14 @@ function flipMem(el, card){
 memReset.onclick=buildMemory;
 
 /* ---------- SPILL 3: Schreif d'Wuert (Tiles) ---------- */
-const wImage=document.getElementById('wImage'), wPlayIcon=document.getElementById('wPlayIcon'),
-      wAnswer=document.getElementById('wAnswer'), wBank=document.getElementById('wBank'),
+const wImage=document.getElementById('wImage'),
+      wPlayIcon=document.getElementById('wPlayIcon'),
+      wAnswer=document.getElementById('wAnswer'),
+      wBank=document.getElementById('wBank'),
       wFeedback=document.getElementById('wFeedback'),
-      wReset=document.getElementById('wReset'), wCheck=document.getElementById('wCheck'), wNext=document.getElementById('wNext');
+      wReset=document.getElementById('wReset'),
+      wCheck=document.getElementById('wCheck'),
+      wNext=document.getElementById('wNext');
 
 const W={ list:shuffle([...ITEMS]), idx:0, answer:[], current:null };
 
@@ -331,15 +427,14 @@ function wInitWord(){
   W.current=W.list[W.idx];
   wImage.src=W.current.img; wImage.alt=W.current.label;
 
-  wAnswer.innerHTML='';
   const target=W.current.word;
+  wAnswer.innerHTML='';
   for(let i=0;i<target.length;i++){
     const slot=document.createElement('div'); slot.className='slot'; slot.dataset.index=i;
     slot.addEventListener('click',()=>wRemove(i));
-    slot.addEventListener('dragover',e=>{e.preventDefault(); slot.classList.add('drag-over');});
-    slot.addEventListener('dragleave',()=>slot.classList.remove('drag-over'));
+    slot.addEventListener('dragover',e=>{e.preventDefault();});
     slot.addEventListener('drop',e=>{
-      e.preventDefault(); slot.classList.remove('drag-over');
+      e.preventDefault();
       const letter=e.dataTransfer.getData('text/plain'); const uid=e.dataTransfer.getData('tile-uid');
       wPlaceIn(letter,i,uid);
     });
@@ -421,7 +516,333 @@ wReset.addEventListener('click',wResetAll);
 wCheck.addEventListener('click',wCheckAns);
 wNext.addEventListener('click',wNextWord);
 
-/* ---------- SPILL 4: Riddles ---------- */
+/* ---------- SPILL 4: Tree decoration ---------- */
+const treeArea=document.getElementById('treeArea');
+const starDropZone=document.getElementById('starDropZone');
+const treeDropZone=document.getElementById('treeDropZone');
+const treeTaskText=document.getElementById('treeTaskText');
+const treeReset=document.getElementById('treeReset');
+const treeCheck=document.getElementById('treeCheck');
+const treeFeedback=document.getElementById('treeFeedback');
+
+const BAUBLE_COLOURS=[
+  {id:'blo', label:'blo', img:'https://i.postimg.cc/njzzgq0y/b-blo.png', pile:'pile-blo'},
+  {id:'rosa', label:'rosa', img:'https://i.postimg.cc/9RMMKyLj/b-rosa.png', pile:'pile-rosa'},
+  {id:'rout', label:'rout', img:'https://i.postimg.cc/gXJJQ3gW/b-rout.png', pile:'pile-rout'},
+  {id:'green', label:'gréng', img:'https://i.postimg.cc/LYXXwjxK/b-green.png', pile:'pile-green'},
+  {id:'giel', label:'giel', img:'https://i.postimg.cc/S2ss3cgb/b-giel.png', pile:'pile-giel'}
+];
+
+const STAR_COLOURS=[
+  {id:'gro', label:'groe', img:'https://i.postimg.cc/phTT4KsR/s-gro.png', pile:'pile-star-gro'},
+  {id:'giel', label:'giele', img:'https://i.postimg.cc/mzDDJ7mT/s-giel.png', pile:'pile-star-giel'},
+  {id:'waiss', label:'wäisse', img:'https://i.postimg.cc/JDnnvjp4/s-waiss.png', pile:'pile-star-waiss'},
+  {id:'orange', label:'orange', img:'https://i.postimg.cc/BL66k2mZ/s-orange.png', pile:'pile-star-orange'}
+];
+
+const LIGHT_TYPES=[
+  {id:'A', img:'https://i.postimg.cc/R6FFywgm/l-mof-blo-orange.png', pile:'pile-lightA'},
+  {id:'B', img:'https://i.postimg.cc/6233gCMw/l-rout-giel-greng.png', pile:'pile-lightB'}
+];
+
+let decorIdCounter=0;
+function newDecorId(){ return 'dec-'+(decorIdCounter++); }
+
+/* create stacked stock items */
+function createTreeStocks(){
+  BAUBLE_COLOURS.forEach(col=>{
+    const pile=document.getElementById(col.pile);
+    pile.innerHTML='';
+    for(let i=0;i<10;i++){
+      const img=document.createElement('img');
+      img.src=col.img; img.alt=col.label+' Chrëschtbull';
+      img.className='decItem';
+      img.draggable=true;
+      img.dataset.kind='bauble';
+      img.dataset.color=col.id;
+      img.dataset.home=col.pile;
+      img.id=newDecorId();
+      attachDecorDrag(img);
+      pile.appendChild(img);
+    }
+  });
+
+  STAR_COLOURS.forEach(sc=>{
+    const pile=document.getElementById(sc.pile);
+    pile.innerHTML='';
+    const img=document.createElement('img');
+    img.src=sc.img; img.alt='Stär';
+    img.className='decItem star';
+    img.draggable=true;
+    img.dataset.kind='star';
+    img.dataset.color=sc.id;
+    img.dataset.home=sc.pile;
+    img.id=newDecorId();
+    attachDecorDrag(img);
+    pile.appendChild(img);
+  });
+
+  LIGHT_TYPES.forEach(lt=>{
+    const pile=document.getElementById(lt.pile);
+    pile.innerHTML='';
+    for(let i=0;i<3;i++){
+      const img=document.createElement('img');
+      img.src=lt.img; img.alt='Chrëschtluuchten';
+      img.className='decItem small';
+      img.draggable=true;
+      img.dataset.kind='light';
+      img.dataset.light=lt.id;
+      img.dataset.home=lt.pile;
+      img.id=newDecorId();
+      attachDecorDrag(img);
+      pile.appendChild(img);
+    }
+  });
+}
+
+function attachDecorDrag(el){
+  el.addEventListener('dragstart',e=>{
+    e.dataTransfer.setData('id',el.id);
+    e.dataTransfer.effectAllowed='move';
+  });
+}
+
+/* allow dropping back to piles */
+[...document.querySelectorAll('.pile')].forEach(pile=>{
+  pile.addEventListener('dragover',e=>{e.preventDefault();});
+  pile.addEventListener('drop',e=>{
+    e.preventDefault();
+    const id=e.dataTransfer.getData('id');
+    const el=document.getElementById(id);
+    if(!el) return;
+    el.style.position='absolute';
+    el.style.left='50%'; el.style.top='50%'; el.style.transform='translate(-50%,-50%)';
+    el.dataset.inTree='false';
+    el.dataset.onStarZone='false';
+    el.dataset.home=pile.id;
+    pile.appendChild(el);
+  });
+});
+
+/* drop on tree */
+treeArea.addEventListener('dragover',e=>{ e.preventDefault(); });
+treeArea.addEventListener('drop',e=>{
+  e.preventDefault();
+  const id=e.dataTransfer.getData('id');
+  const el=document.getElementById(id);
+  if(!el) return;
+
+  const kind=el.dataset.kind;
+  if(kind==='light'){
+    const counts=countLightsInTree();
+    if(counts.total>=2){
+      flash(el,false);
+      return;
+    }
+  }
+
+  const rect=treeDropZone.getBoundingClientRect();
+  const containerRect=treeArea.getBoundingClientRect();
+  const x=e.clientX-containerRect.left;
+  const y=e.clientY-containerRect.top;
+
+  el.style.position='absolute';
+  el.style.left=(x-el.offsetWidth/2)+'px';
+  el.style.top=(y-el.offsetHeight/2)+'px';
+  el.style.transform='';
+  treeArea.appendChild(el);
+  el.dataset.inTree='true';
+
+  const starRect=starDropZone.getBoundingClientRect();
+  const cx=e.clientX, cy=e.clientY;
+  el.dataset.onStarZone = (kind==='star' &&
+    cx>=starRect.left && cx<=starRect.right &&
+    cy>=starRect.top && cy<=starRect.bottom) ? 'true' : 'false';
+});
+
+/* reset */
+function resetAllDecor(){
+  document.querySelectorAll('.decItem').forEach(el=>{
+    const home=document.getElementById(el.dataset.home);
+    if(home){
+      el.style.position='absolute';
+      el.style.left='50%'; el.style.top='50%'; el.style.transform='translate(-50%,-50%)';
+      el.dataset.inTree='false';
+      el.dataset.onStarZone='false';
+      home.appendChild(el);
+    }
+  });
+  treeFeedback.textContent='';
+}
+
+/* task generation */
+let currentTask=null;
+
+function numWord(n){
+  if(n===2) return 'zwou';
+  const map={
+    3:'dräi',4:'véier',5:'fënnef',6:'sechs',7:'siwen',8:'aacht',
+    9:'néng',10:'zéng',11:'eelef',12:'zwielef',13:'dräizéng',
+    14:'véierzéng',15:'fofzéng'
+  };
+  return map[n]||String(n);
+}
+
+/* ensures first colour has count >1 */
+function buildBaubleTask(){
+  const nColours=Math.floor(Math.random()*5)+1; // 1–5
+  const cols=shuffle([...BAUBLE_COLOURS]).slice(0,nColours);
+  const maxTotal=15;
+  const minTotal=nColours;
+  let total=minTotal+Math.floor(Math.random()*(maxTotal-minTotal+1));
+  const counts={};
+  cols.forEach(c=>counts[c.id]=1);
+  let leftover=total-nColours;
+  const ids=cols.map(c=>c.id);
+  while(leftover>0){
+    const id=ids[Math.floor(Math.random()*ids.length)];
+    if(counts[id]<6){ counts[id]++; leftover--; }
+  }
+  let firstId=ids.find(id=>counts[id]>1);
+  if(!firstId){
+    firstId=ids[0];
+    counts[firstId]=2;
+  }
+  const ordered=[firstId,...ids.filter(id=>id!==firstId)];
+  return {counts, order:ordered};
+}
+
+function buildLightTask(){
+  const mode=Math.floor(Math.random()*3)+1;
+  let text='', target={A:0,B:0};
+  if(mode===1){
+    text="D'Chrëschtluuchte sinn all orange, blo, mof.";
+    target.A=2; target.B=0;
+  }else if(mode===2){
+    text="D'Chrëschtluuchte sinn all rout, giel, gréng.";
+    target.A=0; target.B=2;
+  }else{
+    text="D'Luuchte sinn orange, blo, mof, rout, giel a gréng.";
+    target.A=1; target.B=1;
+  }
+  return {mode, text, target};
+}
+
+function buildStarTask(){
+  const requireStar=Math.random()<0.5;
+  if(!requireStar) return {required:false,color:null,text:''};
+  const sc=STAR_COLOURS[Math.floor(Math.random()*STAR_COLOURS.length)];
+  const text=`Um Chrëschtbeemche ass e ${sc.label} Stär.`;
+  return {required:true,color:sc.id,text};
+}
+
+function buildTreeTask(){
+  const b=buildBaubleTask();
+  const counts=b.counts;
+  const order=b.order;
+
+  const parts=[];
+  order.forEach(cid=>{
+    const count=counts[cid];
+    const colInfo=BAUBLE_COLOURS.find(c=>c.id===cid);
+    const numWordLocal = count===1 ? 'eng' : numWord(count);
+    const noun=count===1?'Chrëschtbull':'Chrëschtbullen';
+    parts.push(`${numWordLocal} ${colInfo.label} ${noun}`);
+  });
+
+  let baubleSentence='Um Chrëschtbeemche sinn ';
+  if(parts.length===1){
+    // if only one colour, make sure count >1 already guaranteed
+    baubleSentence+=parts[0]+'.';
+  }else{
+    const last=parts.pop();
+    baubleSentence+=parts.join(', ')+' an '+last+'.';
+  }
+
+  const lightPart=buildLightTask();
+  const starPart=buildStarTask();
+
+  const fullText=baubleSentence+' '+lightPart.text+(starPart.text?(' '+starPart.text):'');
+
+  currentTask={
+    baubles:counts,
+    lightTarget:lightPart.target,
+    starRequired:starPart.required,
+    starColor:starPart.color
+  };
+  treeTaskText.textContent=fullText;
+  treeFeedback.textContent='';
+}
+
+/* counts */
+function countBaublesInTree(){
+  const res={};
+  document.querySelectorAll('.decItem[data-kind="bauble"]').forEach(el=>{
+    if(el.dataset.inTree==='true'){
+      const col=el.dataset.color;
+      res[col]=(res[col]||0)+1;
+    }
+  });
+  return res;
+}
+function countLightsInTree(){
+  const res={A:0,B:0};
+  document.querySelectorAll('.decItem[data-kind="light"]').forEach(el=>{
+    if(el.dataset.inTree==='true'){
+      const t=el.dataset.light;
+      res[t]=(res[t]||0)+1;
+    }
+  });
+  res.total=res.A+res.B;
+  return res;
+}
+function getStarsInTree(){
+  return [...document.querySelectorAll('.decItem[data-kind="star"]')].filter(el=>el.dataset.inTree==='true');
+}
+
+function checkTree(){
+  if(!currentTask) return;
+  let ok=true;
+
+  const baCounts=countBaublesInTree();
+  const needed=currentTask.baubles;
+  const neededCols=Object.keys(needed);
+
+  neededCols.forEach(cid=>{
+    if((baCounts[cid]||0)!==needed[cid]) ok=false;
+  });
+  Object.keys(baCounts).forEach(cid=>{
+    if(!needed[cid]) ok=false;
+  });
+
+  const lights=countLightsInTree();
+  if(lights.total!==2) ok=false;
+  if(lights.A!==currentTask.lightTarget.A || lights.B!==currentTask.lightTarget.B) ok=false;
+
+  const stars=getStarsInTree();
+  if(currentTask.starRequired){
+    if(stars.length!==1) ok=false;
+    else{
+      const s=stars[0];
+      if(s.dataset.color!==currentTask.starColor) ok=false;
+      if(s.dataset.onStarZone!=='true') ok=false;
+    }
+  }else{
+    if(stars.length>0) ok=false;
+  }
+
+  if(ok){
+    treeFeedback.textContent='Dat ass richteg.';
+    setTimeout(()=>{ resetAllDecor(); buildTreeTask(); }, 800);
+  }else{
+    treeFeedback.textContent='Nach net ganz richteg. Kuck nach eng Kéier.';
+  }
+}
+
+treeReset.addEventListener('click',()=>{ resetAllDecor(); });
+treeCheck.addEventListener('click',checkTree);
+
+/* ---------- SPILL 5: Riddles ---------- */
 const riddleText=document.getElementById('riddleText'),
       riddleGrid=document.getElementById('riddleGrid'),
       riddleFeedback=document.getElementById('riddleFeedback');
@@ -467,312 +888,17 @@ function checkRiddle(id,card){
   if(ok){ setTimeout(()=>{ Ridx++; showRiddle(); }, 650); }
 }
 
-/* ---------- SPILL 5: Chrëschtbam dekoréieren ---------- */
-
-const treeArea=document.getElementById('treeArea');
-const starDropZone=document.getElementById('starDropZone');
-const treeTaskText=document.getElementById('treeTaskText');
-const treeReset=document.getElementById('treeReset');
-const treeCheck=document.getElementById('treeCheck');
-const treeFeedback=document.getElementById('treeFeedback');
-
-const BAUBLE_COLOURS=[
-  {id:'blo', label:'blo', img:'https://i.postimg.cc/njzzgq0y/b-blo.png', stockId:'stock-blo'},
-  {id:'rosa', label:'rosa', img:'https://i.postimg.cc/9RMMKyLj/b-rosa.png', stockId:'stock-rosa'},
-  {id:'rout', label:'rout', img:'https://i.postimg.cc/gXJJQ3gW/b-rout.png', stockId:'stock-rout'},
-  {id:'green', label:'gréng', img:'https://i.postimg.cc/LYXXwjxK/b-green.png', stockId:'stock-greeng'},
-  {id:'giel', label:'giel', img:'https://i.postimg.cc/S2ss3cgb/b-giel.png', stockId:'stock-giel'}
-];
-
-const LIGHT_TYPES=[
-  {id:'A', img:'https://i.postimg.cc/R6FFywgm/l-mof-blo-orange.png'},
-  {id:'B', img:'https://i.postimg.cc/6233gCMw/l-rout-giel-greng.png'}
-];
-
-const STAR_COLOURS=[
-  {id:'giel', label:'giele', img:'https://i.postimg.cc/mzDDJ7mT/s-giel.png'},
-  {id:'gro', label:'groe', img:'https://i.postimg.cc/phTT4KsR/s-gro.png'},
-  {id:'orange', label:'orange', img:'https://i.postimg.cc/BL66k2mZ/s-orange.png'},
-  {id:'waiss', label:'wäisse', img:'https://i.postimg.cc/JDnnvjp4/s-waiss.png'}
-];
-
-let decorIdCounter=0;
-function newDecorId(){ return 'dec-'+(decorIdCounter++); }
-
-function createStock(){
-  BAUBLE_COLOURS.forEach(col=>{
-    const row=document.getElementById(col.stockId);
-    row.innerHTML='';
-    for(let i=0;i<10;i++){
-      const img=document.createElement('img');
-      img.src=col.img; img.alt=col.label+' Chrëschtbull';
-      img.className='decItem';
-      img.draggable=true;
-      img.dataset.kind='bauble';
-      img.dataset.color=col.id;
-      img.dataset.home=row.id;
-      img.id=newDecorId();
-      attachDecorDrag(img);
-      img.addEventListener('dblclick',()=>resetDecor(img));
-      row.appendChild(img);
-    }
-  });
-  const stockA=document.getElementById('stock-lightA');
-  const stockB=document.getElementById('stock-lightB');
-  stockA.innerHTML=''; stockB.innerHTML='';
-  for(let i=0;i<4;i++){
-    const imgA=document.createElement('img');
-    imgA.src=LIGHT_TYPES[0].img; imgA.alt='Chrëschtluuchte';
-    imgA.className='decItem small'; imgA.draggable=true;
-    imgA.dataset.kind='light'; imgA.dataset.light='A'; imgA.dataset.home='stock-lightA'; imgA.id=newDecorId();
-    attachDecorDrag(imgA); imgA.addEventListener('dblclick',()=>resetDecor(imgA));
-    stockA.appendChild(imgA);
-
-    const imgB=document.createElement('img');
-    imgB.src=LIGHT_TYPES[1].img; imgB.alt='Chrëschtluuchte';
-    imgB.className='decItem small'; imgB.draggable=true;
-    imgB.dataset.kind='light'; imgB.dataset.light='B'; imgB.dataset.home='stock-lightB'; imgB.id=newDecorId();
-    attachDecorDrag(imgB); imgB.addEventListener('dblclick',()=>resetDecor(imgB));
-    stockB.appendChild(imgB);
-  }
-  const starRow=document.getElementById('stock-star');
-  starRow.innerHTML='';
-  STAR_COLOURS.forEach(sc=>{
-    const img=document.createElement('img');
-    img.src=sc.img; img.alt='Stär'; img.className='decItem star'; img.draggable=true;
-    img.dataset.kind='star'; img.dataset.color=sc.id; img.dataset.home='stock-star'; img.id=newDecorId();
-    attachDecorDrag(img); img.addEventListener('dblclick',()=>resetDecor(img));
-    starRow.appendChild(img);
-  });
-}
-
-function attachDecorDrag(el){
-  el.addEventListener('dragstart',e=>{
-    e.dataTransfer.setData('id',el.id);
-    e.dataTransfer.effectAllowed='move';
-  });
-}
-
-/* drop on tree */
-treeArea.addEventListener('dragover',e=>{ e.preventDefault(); });
-treeArea.addEventListener('drop',e=>{
-  e.preventDefault();
-  const id=e.dataTransfer.getData('id');
-  const el=document.getElementById(id);
-  if(!el) return;
-  const rect=treeArea.getBoundingClientRect();
-  const x=e.clientX-rect.left;
-  const y=e.clientY-rect.top;
-
-  el.style.position='absolute';
-  el.style.left=(x-el.offsetWidth/2)+'px';
-  el.style.top=(y-el.offsetHeight/2)+'px';
-  treeArea.appendChild(el);
-  el.dataset.inTree='true';
-
-  const starRect=starDropZone.getBoundingClientRect();
-  const cx=e.clientX, cy=e.clientY;
-  el.dataset.onStarZone = (el.dataset.kind==='star' &&
-    cx>=starRect.left && cx<=starRect.right && cy>=starRect.top && cy<=starRect.bottom) ? 'true' : 'false';
-});
-
-/* double-click reset */
-function resetDecor(el){
-  const home=document.getElementById(el.dataset.home);
-  if(!home) return;
-  el.style.position='';
-  el.style.left=''; el.style.top='';
-  el.dataset.inTree='false';
-  el.dataset.onStarZone='false';
-  home.appendChild(el);
-}
-
-/* reset all decorations */
-function resetAllDecor(){
-  const all=document.querySelectorAll('.decItem');
-  all.forEach(resetDecor);
-  treeFeedback.textContent='';
-}
-
-/* Task generation */
-let currentTask=null; // {baubles:{color->count}, lightMode, starRequired, starColor}
-
-function numWord(n){
-  if(n===1) return 'eng';
-  if(n===2) return 'zwou';
-  const map={
-    3:'dräi',4:'véier',5:'fënnef',6:'sechs',7:'siwen',8:'aacht',
-    9:'néng',10:'zéng',11:'eelef',12:'zwielef',13:'dräizéng',
-    14:'véierzéng',15:'fofzéng'
-  };
-  return map[n]||String(n);
-}
-
-function buildBaubleTask(){
-  const nColours=Math.floor(Math.random()*5)+1; // 1–5
-  const cols=shuffle([...BAUBLE_COLOURS]).slice(0,nColours);
-  const maxTotal=15;
-  const minTotal=nColours;
-  let total=minTotal+Math.floor(Math.random()*(maxTotal-minTotal+1));
-  const counts={};
-  cols.forEach(c=>counts[c.id]=1);
-  let leftover=total-nColours;
-  const ids=cols.map(c=>c.id);
-  while(leftover>0){
-    const id=ids[Math.floor(Math.random()*ids.length)];
-    if(counts[id]<5){ counts[id]++; leftover--; } else{
-      const room=ids.filter(cid=>counts[cid]<5);
-      if(room.length===0) break;
-    }
-  }
-  return counts;
-}
-
-function buildLightTask(){
-  const mode=Math.floor(Math.random()*3)+1; // 1,2,3
-  let text='', target={A:0,B:0};
-  if(mode===1){
-    text="D'Chrëschtluuchte sinn all orange, blo, mof.";
-    target.A=2; target.B=0;
-  }else if(mode===2){
-    text="D'Chrëschtluuchte sinn all rout, giel, gréng.";
-    target.A=0; target.B=2;
-  }else{
-    text="D'Luuchte sinn orange, blo, mof, rout, giel a gréng.";
-    target.A=1; target.B=1;
-  }
-  return {mode, text, target};
-}
-
-function buildStarTask(){
-  const requireStar=Math.random()<0.5;
-  if(!requireStar) return {required:false, color:null, text:''};
-  const sc=STAR_COLOURS[Math.floor(Math.random()*STAR_COLOURS.length)];
-  const text=`Um Chrëschtbeemche ass e ${sc.label} Stär.`;
-  return {required:true,color:sc.id,text};
-}
-
-function buildTreeTask(){
-  const baubles=buildBaubleTask();
-  const coloursUsed=Object.keys(baubles);
-  const parts=[];
-  coloursUsed.forEach((cid,idx)=>{
-    const count=baubles[cid];
-    const colInfo=BAUBLE_COLOURS.find(c=>c.id===cid);
-    const num=numWord(count);
-    const noun=count===1?'Chrëschtbull':'Chrëschtbullen';
-    parts.push(`${num} ${colInfo.label} ${noun}`);
-  });
-  let baubleSentence='Um Chrëschtbeemche sinn ';
-  if(parts.length===1){
-    baubleSentence+=parts[0]+'.';
-  }else{
-    const last=parts.pop();
-    baubleSentence+=parts.join(', ')+' an '+last+'.';
-  }
-
-  const lightPart=buildLightTask();
-  const starPart=buildStarTask();
-
-  const fullText=baubleSentence+' '+lightPart.text+(starPart.text?(' '+starPart.text):'');
-
-  currentTask={
-    baubles,
-    lightTarget:lightPart.target,
-    starRequired:starPart.required,
-    starColor:starPart.color
-  };
-  treeTaskText.textContent=fullText;
-  treeFeedback.textContent='';
-}
-
-/* count decorations in tree */
-function countBaublesInTree(){
-  const res={};
-  document.querySelectorAll('.decItem[data-kind="bauble"]').forEach(el=>{
-    if(el.dataset.inTree==='true'){
-      const col=el.dataset.color;
-      res[col]=(res[col]||0)+1;
-    }
-  });
-  return res;
-}
-function countLightsInTree(){
-  const res={A:0,B:0};
-  document.querySelectorAll('.decItem[data-kind="light"]').forEach(el=>{
-    if(el.dataset.inTree==='true'){
-      const t=el.dataset.light;
-      res[t]=(res[t]||0)+1;
-    }
-  });
-  return res;
-}
-function getStarInTree(){
-  const stars=[...document.querySelectorAll('.decItem[data-kind="star"]')].filter(el=>el.dataset.inTree==='true');
-  return stars;
-}
-
-function checkTree(){
-  if(!currentTask) return;
-  let ok=true;
-
-  const baCounts=countBaublesInTree();
-  const needed=currentTask.baubles;
-  const neededCols=Object.keys(needed);
-
-  neededCols.forEach(cid=>{
-    if((baCounts[cid]||0)!==needed[cid]) ok=false;
-  });
-  Object.keys(baCounts).forEach(cid=>{
-    if(!needed[cid]) ok=false;
-  });
-
-  const lights=countLightsInTree();
-  const totalLights=lights.A+lights.B;
-  if(totalLights!==2) ok=false;
-  if(lights.A!==currentTask.lightTarget.A || lights.B!==currentTask.lightTarget.B) ok=false;
-
-  const stars=getStarInTree();
-  if(currentTask.starRequired){
-    if(stars.length!==1) ok=false;
-    else{
-      const s=stars[0];
-      if(s.dataset.color!==currentTask.starColor) ok=false;
-      if(s.dataset.onStarZone!=='true') ok=false;
-    }
-  }else{
-    if(stars.length>0) ok=false;
-  }
-
-  if(ok){
-    treeFeedback.textContent='Dat ass richteg.';
-    setTimeout(()=>{ resetAllDecor(); buildTreeTask(); }, 800);
-  }else{
-    treeFeedback.textContent='Nach net ganz richteg. Kuck nach eng Kéier.';
-  }
-}
-
 /* ---------- INIT ---------- */
 function init(){
-  // Spill 1
   layoutG1(); nextG1();
-  // Spill 2
   buildMemory();
-  // Spill 3
   W.list=shuffle([...ITEMS]); W.idx=0; wInitWord();
-  // Spill 4
+  createTreeStocks(); resetAllDecor(); buildTreeTask();
   initRiddles();
-  // Spill 5
-  createStock(); resetAllDecor(); buildTreeTask();
-
-  treeReset.addEventListener('click',()=>{ resetAllDecor(); });
-  treeCheck.addEventListener('click',checkTree);
-
   showPage(0);
 }
 init();
 </script>
 </body>
 </html>
-
 
